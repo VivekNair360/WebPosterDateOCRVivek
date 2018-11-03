@@ -3,13 +3,10 @@
 
     <head>
         <link href="styles.css" rel="stylesheet">
-        <!-- <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
         <title>Record Dates the Easy Way!</title>
         <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-        <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
-        <!-- <script src="main.js"></script> -->
-    
+        <script src="main.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     </head>
 
     <body>
@@ -29,11 +26,14 @@
             <form >
             
             </form>
-            <button type="button">Upload</button>
+            <button type="button" onclick="processImage()">Upload</button>
             <input type="file" name="somename" size = "n" title="Upload your photo!">
         </div>
         <div class="text-center">
             <button type="button">Submit to Calendar</button>
+        </div>
+        <div>
+            <p id="responseTextArea">Hello</p>
         </div>
 
     </body>
