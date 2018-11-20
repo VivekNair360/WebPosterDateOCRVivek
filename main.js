@@ -1,10 +1,20 @@
+let inputURL = "https://www.canada.ca/content/canadasite/en/revenue-agency/corporate/security/protect-yourself-against-fraud/sample-text-message/_jcr_content/par/div_0_2/col_2/img_0_0/image.img.jpg/1494475181975.jpg";
+window.onload = () => {
+    document.getElementById("url-submit").addEventListener("click", () => {
+        inputURL = document.getElementById("image-URL").value;
+        console.log(`INPUTURL: ${inputURL}`);
+        processImage();
+    })
+
+}
+
 function processImage() {
     // **********************************************
     // *** Update or verify the following values. ***
     // **********************************************
 
     // Replace <Subscription Key> with your valid subscription key.
-    let subscriptionKey = "ccae1a162791428293b0863d7ace51ee";
+    let subscriptionKey = "d7b7af3c073944baabc31ddd2a4be7a6";
 
     // You must use the same Azure region in your REST API method as you used to
     // get your subscription keys. For example, if you got your subscription keys
@@ -24,7 +34,7 @@ function processImage() {
     };
 
     // Display the image.
-    let sourceImageUrl = "https://www.canada.ca/content/canadasite/en/revenue-agency/corporate/security/protect-yourself-against-fraud/sample-text-message/_jcr_content/par/div_0_2/col_2/img_0_0/image.img.jpg/1494475181975.jpg";
+    let sourceImageUrl = inputURL;
 
     // document.getElementById("inputImage").value;
     // document.querySelector("#sourceImage").src = sourceImageUrl;

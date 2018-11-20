@@ -1,42 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 
-    <head>
-        <link href="styles.css" rel="stylesheet">
-        <title>Record Dates the Easy Way!</title>
-        <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-        <script src="main.js"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    </head>
+<head>
+    <link href="styles.css" rel="stylesheet">
+    <title>Record Dates the Easy Way!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <script src="main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
 
-    <body>
-        <div id="title" class="text-center">
-            <h1 class="text-center">Date Calendar</h1>
-            <p>Upload a picture to be transcribed!</p>
-            <img src="Placeholder.jpg">
-        </div>    
-        <div class="text-center">
-            <button type="button">Upload</button>
-        </div>
-        <!-- <div class="text-center">
-            <img src="Placeholder.jpg" >
-        </div> -->
-
-        <div class="text-center">
-            <form >
-            
-            </form>
-            <button type="button" onclick="processImage()">Upload</button>
-            <input type="file" name="somename" size = "n" title="Upload your photo!">
-        </div>
-        <div class="text-center">
-            <button type="button">Submit to Calendar</button>
-        </div>
-        <div>
-            <p id="responseTextArea">Hello</p>
+<body>
+    <div id="title" class="text-center">
+        <h1 class="text-center">Date Calendar</h1>
+        <p>Upload a picture to be transcribed!</p>
+        <img src="Placeholder.jpg">
+    </div>
+    <div class="text-center">
+        <button type="button" class="btn btn-primary">Upload</button>
+    </div>
+    <div class="text-center">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+            </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+            </div>
         </div>
 
-    </body>
+        <div class="input-group mb-3">
+            <input type="text" id="image-URL" class="form-control" placeholder="Enter your URL here" aria-label="Username"
+                aria-describedby="basic-addon1">
+            <div class="input-group-append">
+                <button type="button" class="btn btn-primary inline" id="url-submit">Get Text!</button>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <button type="button" class="btn btn-primary">Submit to Calendar</button>
+    </div>
+
+</body>
 
 </html>
 

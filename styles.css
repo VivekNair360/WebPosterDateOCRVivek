@@ -1,13 +1,21 @@
 .text-center {
     text-align: center;
 }
+
+.inline {
+    display: inline;
+}
+
 #title{
     height: 350px;
     /* background-color: lightblue; */
 }
+
 h1 {
     margin:0;
 }
+
+
 html, body {
     height: 100%;
     margin:0px;
