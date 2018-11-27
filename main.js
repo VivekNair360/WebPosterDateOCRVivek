@@ -4,7 +4,7 @@ window.onload = () => {
         inputURL = document.getElementById("image-URL").value;
         console.log(`INPUTURL: ${inputURL}`);
         processImage();
-    })
+    });
 
 }
 
@@ -58,8 +58,7 @@ function processImage() {
 
     .done(function(data) {
         // Show formatted JSON on webpage.
-        let s = JSON.stringify(data, null, 2);
-        console.log(`JSON: ${s}`);
+        getWords(data);
     })
 
     .fail(function(jqXHR, textStatus, errorThrown) {
@@ -71,3 +70,14 @@ function processImage() {
         alert(errorString);
     });
 };
+
+function getWords(data) {
+    data.regions.forEach( element => {
+        element.lines.forEach( line => {
+            line.words.forEach( word => {
+                console.log(word.text);
+            })
+            console.log("\n");
+        });
+    });
+}
