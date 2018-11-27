@@ -1,4 +1,6 @@
 let inputURL = "https://www.canada.ca/content/canadasite/en/revenue-agency/corporate/security/protect-yourself-against-fraud/sample-text-message/_jcr_content/par/div_0_2/col_2/img_0_0/image.img.jpg/1494475181975.jpg";
+let jsonString = "";
+let dateString = "";
 window.onload = () => {
     document.getElementById("url-submit").addEventListener("click", () => {
         inputURL = document.getElementById("image-URL").value;
@@ -68,7 +70,6 @@ function processImage() {
         // Request body.
         data: '{"url": ' + '"' + sourceImageUrl + '"}',
     })
-
         .done(function (data) {
             // Show formatted JSON on webpage.
             getWords(data);
