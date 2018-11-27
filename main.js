@@ -5,7 +5,26 @@ window.onload = () => {
         console.log(`INPUTURL: ${inputURL}`);
         processImage();
     });
+}
 
+function uploadImage() {
+    let f = document.getElementById('inputGroupFile01').files[0];
+
+    if (f) {
+        let r = new FileReader();
+        r.onload = function (e) {
+            var contents = e.target.result;
+            alert("name: " + f.name + "n"
+                + "type: " + f.type + "n"
+                + "size: " + f.size + " bytesn"
+                + "starts with: " + contents
+            );
+        }
+        r.readAsArrayBuffer(f);
+        r.onloadend = () => {
+            console.log(r.result);
+        }
+    }
 }
 
 function processImage() {
@@ -38,8 +57,8 @@ function processImage() {
         url: uriBase + "?" + $.param(params),
 
         // Request headers.
-        beforeSend: function(xhrObj){
-            xhrObj.setRequestHeader("Content-Type","application/json");
+        beforeSend: function (xhrObj) {
+            xhrObj.setRequestHeader("Content-Type", "application/json");
             xhrObj.setRequestHeader(
                 "Ocp-Apim-Subscription-Key", subscriptionKey);
         },
@@ -50,32 +69,32 @@ function processImage() {
         data: '{"url": ' + '"' + sourceImageUrl + '"}',
     })
 
-    .done(function(data) {
-        // Show formatted JSON on webpage.
-        getWords(data);
-    })
+        .done(function (data) {
+            // Show formatted JSON on webpage.
+            getWords(data);
+        })
 
-    .fail(function(jqXHR, textStatus, errorThrown) {
-        // Display error message.
-        var errorString = (errorThrown === "") ? "Error. " :
-            errorThrown + " (" + jqXHR.status + "): ";
-        errorString += (jqXHR.responseText === "") ? "" :
-            jQuery.parseJSON(jqXHR.responseText).message;
-        alert(errorString);
-    });
+        .fail(function (jqXHR, textStatus, errorThrown) {
+            // Display error message.
+            var errorString = (errorThrown === "") ? "Error. " :
+                errorThrown + " (" + jqXHR.status + "): ";
+            errorString += (jqXHR.responseText === "") ? "" :
+                jQuery.parseJSON(jqXHR.responseText).message;
+            alert(errorString);
+        });
 };
 
 function getWords(data) {
-    let sentenceArr;
-    data.regions.forEach( element => {
-        element.lines.forEach( line => {
-            let sentence;
-            line.words.forEach( word => {
-                console.log(word.text);
+    let sentenceArr = [];
+    data.regions.forEach(element => {
+        element.lines.forEach(line => {
+            let sentence = [];
+            line.words.forEach(word => {
+                // console.log(word.text);
                 sentence.push(word.text);
             })
             sentenceArr.push(sentence);
-            console.log("\n");
+            // console.log("\n");
         });
     });
     return sentenceArr;
