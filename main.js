@@ -4,16 +4,11 @@ window.onload = () => {
         inputURL = document.getElementById("image-URL").value;
         console.log(`INPUTURL: ${inputURL}`);
         processImage();
-    })
+    });
 
 }
 
 function processImage() {
-    // **********************************************
-    // *** Update or verify the following values. ***
-    // **********************************************
-
-    // Replace <Subscription Key> with your valid subscription key.
     let subscriptionKey = "d7b7af3c073944baabc31ddd2a4be7a6";
 
     // You must use the same Azure region in your REST API method as you used to
@@ -24,8 +19,7 @@ function processImage() {
     // Free trial subscription keys are generated in the West Central US region.
     // If you use a free trial subscription key, you shouldn't need to change
     // this region.
-    let uriBase =
-        "https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/ocr";
+    let uriBase = "https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/ocr";
 
     // Request parameters.
     let params = {
@@ -58,8 +52,7 @@ function processImage() {
 
     .done(function(data) {
         // Show formatted JSON on webpage.
-        let s = JSON.stringify(data, null, 2);
-        console.log(`JSON: ${s}`);
+        getWords(data);
     })
 
     .fail(function(jqXHR, textStatus, errorThrown) {
@@ -71,3 +64,19 @@ function processImage() {
         alert(errorString);
     });
 };
+
+function getWords(data) {
+    let sentenceArr;
+    data.regions.forEach( element => {
+        element.lines.forEach( line => {
+            let sentence;
+            line.words.forEach( word => {
+                console.log(word.text);
+                sentence.push(word.text);
+            })
+            sentenceArr.push(sentence);
+            console.log("\n");
+        });
+    });
+    return sentenceArr;
+}
