@@ -1,4 +1,6 @@
 let inputURL = "https://www.canada.ca/content/canadasite/en/revenue-agency/corporate/security/protect-yourself-against-fraud/sample-text-message/_jcr_content/par/div_0_2/col_2/img_0_0/image.img.jpg/1494475181975.jpg";
+let jsonString = "";
+let dateString = "";
 window.onload = () => {
     document.getElementById("url-submit").addEventListener("click", () => {
         inputURL = document.getElementById("image-URL").value;
@@ -52,7 +54,36 @@ function processImage() {
 
     .done(function(data) {
         // Show formatted JSON on webpage.
+<<<<<<< Updated upstream
         getWords(data);
+=======
+        let s = JSON.stringify(data, null, 2);
+        jsonString = s;
+        console.log(`JSON: ${s}`);
+>>>>>>> Stashed changes
+    })
+
+    .done(function(s) {
+        // Retrieve date from JSON string and show on webpage.
+        var i;
+        for(i = 0; i < jsonString.length - 7; i++) {
+            //"[0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9]"
+            var j = 0;
+            if (jsonString.substring(i, i + 8)
+            .match('[0-9][0-9]\\.[0-9][0-9]\\.[0-9][0-9]')) {
+                // var j = 0;
+                dateString += jsonString.substring(i, i + 8);
+                j++;
+                
+            }
+        }
+        console.log(j);
+        if (dateString == "") {
+            console.log("This String is empty");
+        } else {
+            console.log(dateString);
+        }
+        
     })
 
     .fail(function(jqXHR, textStatus, errorThrown) {
