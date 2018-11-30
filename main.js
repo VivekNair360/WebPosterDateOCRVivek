@@ -7,26 +7,7 @@ window.onload = () => {
         console.log(`INPUTURL: ${inputURL}`);
         processImage();
     });
-}
 
-function uploadImage() {
-    let f = document.getElementById('inputGroupFile01').files[0];
-
-    if (f) {
-        let r = new FileReader();
-        r.onload = function (e) {
-            var contents = e.target.result;
-            alert("name: " + f.name + "n"
-                + "type: " + f.type + "n"
-                + "size: " + f.size + " bytesn"
-                + "starts with: " + contents
-            );
-        }
-        r.readAsArrayBuffer(f);
-        r.onloadend = () => {
-            console.log(r.result);
-        }
-    }
 }
 
 function processImage() {
@@ -59,8 +40,8 @@ function processImage() {
         url: uriBase + "?" + $.param(params),
 
         // Request headers.
-        beforeSend: function (xhrObj) {
-            xhrObj.setRequestHeader("Content-Type", "application/json");
+        beforeSend: function(xhrObj){
+            xhrObj.setRequestHeader("Content-Type","application/json");
             xhrObj.setRequestHeader(
                 "Ocp-Apim-Subscription-Key", subscriptionKey);
         },
@@ -70,27 +51,29 @@ function processImage() {
         // Request body.
         data: '{"url": ' + '"' + sourceImageUrl + '"}',
     })
-        .done(function (data) {
-            // Show formatted JSON on webpage.
-            getWords(data);
-        })
 
-        .fail(function (jqXHR, textStatus, errorThrown) {
-            // Display error message.
-            var errorString = (errorThrown === "") ? "Error. " :
-                errorThrown + " (" + jqXHR.status + "): ";
-            errorString += (jqXHR.responseText === "") ? "" :
-                jQuery.parseJSON(jqXHR.responseText).message;
-            alert(errorString);
-        });
+    .done(function(data) {
+        // Show formatted JSON on webpage.
+        getDates(getWords(data));
+    })
+
+
+    .fail(function(jqXHR, textStatus, errorThrown) {
+        // Display error message.
+        var errorString = (errorThrown === "") ? "Error. " :
+            errorThrown + " (" + jqXHR.status + "): ";
+        errorString += (jqXHR.responseText === "") ? "" :
+            jQuery.parseJSON(jqXHR.responseText).message;
+        alert(errorString);
+    });
 };
 
 function getWords(data) {
     let sentenceArr = [];
-    data.regions.forEach(element => {
-        element.lines.forEach(line => {
+    data.regions.forEach( element => {
+        element.lines.forEach( line => {
             let sentence = [];
-            line.words.forEach(word => {
+            line.words.forEach( word => {
                 // console.log(word.text);
                 sentence.push(word.text);
             })
@@ -99,4 +82,26 @@ function getWords(data) {
         });
     });
     return sentenceArr;
+}
+
+function getDates(sentenceArr) {
+    //let raw = sentenceArr.match("(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})(?=\W)|\b(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])?|(?:(?:16|[2468][048]|[3579][26])00)?)))(?=\W)|\b(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))(\4)?(?:(?:1[6-9]|[2-9]\d)?\d{2})?(?=\b)");
+    sentenceArr.forEach( element => {
+        //console.log(element);
+        //rightElements = element.match("[0-9]{1,2}/[0-9]{1,2}/[0-9]{2,4}");
+        element.forEach( word => {
+            var re = new RegExp("[0-9]{1,2}/[0-9]{1,2}/[0-9]{2,4};");
+            if (re.test(word)) {
+                console.log(word.substring(0, word.length - 1));
+            }
+            
+            // console.log(word);
+           /*  word.forEach( part => {
+                console.log(part.text);
+            }); */
+            //let stor = word.match("[0-9]/[0-9]{2}/[0-9]{2};");
+            //console.log(stor.input);
+            // .match("[0-9]{2}([\-/ \.])[0-9]{2}[\-/ \.][0-9]{4};")
+        });
+    });
 }
