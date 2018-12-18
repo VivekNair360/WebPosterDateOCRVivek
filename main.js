@@ -94,7 +94,8 @@ function getDates(sentenceArr) {
         element.forEach( word => {
             var re = new RegExp("[0-9]{1,2}/[0-9]{1,2}/[0-9]{2,4};");
             if (re.test(word)) {
-                console.log(word.substring(0, word.length - 1));
+                // console.log(word.substring(0, word.length - 1));
+                document.getElementById("Output").value = word.substring(0, word.length - 1);
             }
             
             // console.log(word);
