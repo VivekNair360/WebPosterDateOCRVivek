@@ -86,6 +86,7 @@ function getWords(data) {
 
 function getDates(sentenceArr) {
     var url = "https://faculty.up.edu/ainan/PalindromeDay7102017image2.jpg";
+    var text = "";
 
     //let raw = sentenceArr.match("(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})(?=\W)|\b(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])?|(?:(?:16|[2468][048]|[3579][26])00)?)))(?=\W)|\b(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))(\4)?(?:(?:1[6-9]|[2-9]\d)?\d{2})?(?=\b)");
     sentenceArr.forEach( element => {
@@ -93,9 +94,10 @@ function getDates(sentenceArr) {
         //rightElements = element.match("[0-9]{1,2}/[0-9]{1,2}/[0-9]{2,4}");
         element.forEach( word => {
             var re = new RegExp("[0-9]{1,2}/[0-9]{1,2}/[0-9]{2,4};");
-            if (re.test(word)) {
+            if (re.test(word)) { 
+                text += word.substring(0, word.length - 1) + "\n";
                 // console.log(word.substring(0, word.length - 1));
-                document.getElementById("Output").value += word.substring(0, word.length - 1);
+                //document.getElementById("Output").value += word.substring(0, word.length - 1);
             }
             
             // console.log(word);
@@ -107,6 +109,7 @@ function getDates(sentenceArr) {
             // .match("[0-9]{2}([\-/ \.])[0-9]{2}[\-/ \.][0-9]{4};")
         });
     });
+    document.getElementById("Output").value = text;
 }
 
 /*SOME NOTES:
